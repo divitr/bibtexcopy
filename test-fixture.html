@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="citation_title" content="Metadata BibTeX Fixture">
+    <meta name="citation_author" content="Example, H">
+    <meta name="citation_journal_title" content="Journal of Extension Fixtures">
+    <meta name="citation_publication_date" content="2026/06/05">
+    <meta name="citation_doi" content="10.1016/example.fixture.2026">
+    <title>BibTeX Copy Fixture</title>
+    <style>
+      body {
+        max-width: 720px;
+        margin: 32px auto;
+        padding: 0 16px;
+        color: #17202a;
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+      }
+
+      button,
+      a {
+        display: inline-flex;
+        margin: 6px 8px 6px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>BibTeX Copy Fixture</h1>
+    <p>Load the extension unpacked, enable Chrome's download prompt, enable file URL access for this extension, then try these controls.</p>
+
+    <p>
+      <a href="data:text/plain,@article%7Bfixture2026%2C%0A%20%20title%3D%7BDirect%20BibTeX%20Fixture%7D%2C%0A%20%20author%3D%7BExample%2C%20A%7D%2C%0A%20%20year%3D%7B2026%7D%0A%7D" download="fixture.bib">Download BibTeX direct link</a>
+    </p>
+
+    <p>
+      <button id="blob-download">Generate BibTeX blob download</button>
+    </p>
+
+    <section>
+      <h2>BibTeX</h2>
+      <pre><code>@inproceedings{embedded2026,
+  title={Embedded PMLR-Style BibTeX Fixture},
+  author={Example, C},
+  year={2026}
+}</code></pre>
+      <button id="embedded-download">Download</button>
+    </section>
+
+    <p>
+      <button id="data-url-download">Generate BibTeX data URL download</button>
+      <button id="data-url-window-open">Generate BibTeX window.open download</button>
+      <button id="fetch-export">Fetch BibTeX export</button>
+      <button id="xhr-export">XHR BibTeX export</button>
+      <button id="metadata-export">Export citation to BibTeX</button>
+    </p>
+
+    <p>
+      <a href="data:text/plain,This%20is%20not%20BibTeX" download="notes.txt">Download normal text file</a>
+    </p>
+
+    <script>
+      document.getElementById("blob-download").addEventListener("click", () => {
+        const bibtex = `@article{blob2026,
+  title={Generated Blob BibTeX Fixture},
+  author={Example, B},
+  year={2026}
+}`;
+        const blob = new Blob([bibtex], { type: "application/x-bibtex" });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = "generated-citation.bib";
+        anchor.click();
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
+      });
+
+      document.getElementById("embedded-download").addEventListener("click", () => {
+        const bibtex = document.querySelector("section code").textContent;
+        const blob = new Blob([bibtex], { type: "application/x-bibtex" });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = "embedded-citation.bib";
+        anchor.click();
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
+      });
+
+      document.getElementById("data-url-download").addEventListener("click", () => {
+        const bibtex = `@article{dataurl2026,
+  title={Generated Data URL BibTeX Fixture},
+  author={Example, D},
+  year={2026}
+}`;
+        const anchor = document.createElement("a");
+        anchor.href = "data:text/plain;charset=utf-8," + encodeURIComponent(bibtex);
+        anchor.download = "data-url-citation.bib";
+        anchor.click();
+      });
+
+      document.getElementById("data-url-window-open").addEventListener("click", () => {
+        const bibtex = `@article{windowopen2026,
+  title={Generated Window Open BibTeX Fixture},
+  author={Example, E},
+  year={2026}
+}`;
+        window.open("data:text/plain;charset=utf-8," + encodeURIComponent(bibtex));
+      });
+
+      document.getElementById("fetch-export").addEventListener("click", async () => {
+        const bibtex = `@article{fetch2026,
+  title={Fetched BibTeX Export Fixture},
+  author={Example, F},
+  year={2026}
+}`;
+        await fetch("data:application/x-bibtex;charset=utf-8," + encodeURIComponent(bibtex));
+      });
+
+      document.getElementById("xhr-export").addEventListener("click", () => {
+        const bibtex = `@article{xhr2026,
+  title={XHR BibTeX Export Fixture},
+  author={Example, G},
+  year={2026}
+}`;
+        const request = new XMLHttpRequest();
+        request.open("GET", "data:application/x-bibtex;charset=utf-8," + encodeURIComponent(bibtex));
+        request.send();
+      });
+    </script>
+  </body>
+</html>

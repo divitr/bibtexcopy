@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect x="8" y="8" width="112" height="112" rx="18" fill="#fafafa"/>
+  <rect x="8.5" y="8.5" width="111" height="111" rx="17.5" fill="none" stroke="#e7e7e7"/>
+  <text x="64" y="76" text-anchor="middle" fill="#4a4a4a" font-family="Charter, Georgia, Cambria, serif" font-size="42" font-weight="600" letter-spacing="-1">@{}</text>
+</svg>
